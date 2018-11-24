@@ -1,8 +1,8 @@
-const models = require('./models');
+const models = require('../models');
 
 const TARGETS = [
   {
-    name: 'Darkumbra v1',
+    name: 'Darkumbra - Switch Content',
     scrapperName: 'darkumbra',
     description: 'Switch content games',
     http: {
@@ -22,7 +22,7 @@ const TARGETS = [
     },
   },
   {
-    name: 'PreDB v1',
+    name: 'PreDB',
     scrapperName: 'predb',
     description: 'Switch releases list page',
     http: {
@@ -38,6 +38,38 @@ const TARGETS = [
       params: {
         search: 'nsw',
       },
+    },
+  },
+  {
+    name: 'NSWDB',
+    scrapperName: 'nswdb',
+    description: 'Switch releases list page',
+    http: {
+      client: 'axios',
+      clientOptions: {
+        maxRetries: undefined,
+        timeout: undefined,
+        waitPageLoad: undefined,
+      },
+      host: 'http://nswdb.com/',
+      path: '',
+      method: 'get',
+    },
+  },
+  {
+    name: 'Reddit - SwitchHaxing/New',
+    scrapperName: 'reddit-api',
+    description: 'Reddit SwitchHaxing New posts',
+    http: {
+      client: 'axios',
+      clientOptions: {
+        maxRetries: undefined,
+        timeout: undefined,
+        waitPageLoad: undefined,
+      },
+      host: 'https://www.reddit.com',
+      path: '/r/SwitchHaxing/new.json',
+      method: 'get',
     },
   },
 ];
@@ -65,9 +97,9 @@ module.exports = async function seed() {
       name: 'TASK #2',
       description: 'Test task number 2',
       active: false,
-      startOnCreate: true,
+      startOnCreate: false,
       cron: '* * * * *',
-      targets: [...targetIds],
+      targets: [targetIds[3]],
       emails: ['test@test.com'],
     },
   ];

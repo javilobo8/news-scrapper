@@ -23,8 +23,11 @@ module.exports = (html) => {
 
     const a = post.find('div.p-head > div.p-c-title > h2 > a.p-title');
 
+    const name = String(a.text()).trim();
+
     entry.entryId = post.attr('id');
-    entry.title = String(a.text()).trim();
+    entry.title = name.replace(/_/ig, ' ');
+    entry.subtitle = name;
     entry.url = a.attr('href');
 
     entries.push(entry);

@@ -1,4 +1,7 @@
 const chalk = require('chalk');
+const BluebirdPromise = require('bluebird');
+
+global.Promise = BluebirdPromise;
 
 const now = () => new Date().toISOString();
 
