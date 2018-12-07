@@ -1,7 +1,6 @@
 const schedule = require('node-schedule');
 
 const scrappers = require('../scrappers');
-const seed = require('../utils/seed');
 
 const logger = require('../utils/logger');
 
@@ -19,7 +18,6 @@ class WebScrapper {
 
   async init() {
     this.log('Init');
-    await seed(); // TODO: remove me
 
     this.reloadJobs();
   }
