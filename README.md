@@ -1,5 +1,7 @@
 # poc-news-bot
 
+[![build](https://travis-ci.org/javilobo8/poc-news-bot.svg?branch=master)](https://travis-ci.org/javilobo8/poc-news-bot.svg?branch=master)
+
 Application for save/send posts from scrapping webs. Useful for news, forums, lists...
 
 ## TODO
