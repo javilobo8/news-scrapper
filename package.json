@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node bin/www"
+    "start": "node bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -23,6 +24,26 @@
   "devDependencies": {
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.2",
+    "jest": "^23.6.0",
+    "jest-circus": "^23.6.0",
+    "jest-environment-node": "^23.4.0",
+    "mongodb": "^3.1.10",
+    "mongodb-memory-server": "^2.7.4"
+  },
+  "jest": {
+    "testEnvironment": "<rootDir>/test/mongo-environment.js",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/bin/",
+      "<rootDir>/test/"
+    ],
+    "coverageReporters": ["html"]
   }
 }
