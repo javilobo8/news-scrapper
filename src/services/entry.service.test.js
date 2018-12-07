@@ -27,7 +27,7 @@ describe('EntryService', () => {
         },
       ];
 
-      afterAll(() => models.Entry.delete());
+      afterAll(() => models.Entry.deleteMany());
 
       it('should add new entries', async () => {
         await entryService.createMany(newEntries);
@@ -51,7 +51,7 @@ describe('EntryService', () => {
       };
 
       beforeAll(() => models.Entry.create(baseEntry));
-      afterAll(() => models.Entry.delete());
+      afterAll(() => models.Entry.deleteMany());
 
       it('should return the correct entry', async () => {
         const result = await entryService.getById(entryDocId);
@@ -78,7 +78,7 @@ describe('EntryService', () => {
       };
 
       beforeAll(() => models.Entry.create(baseEntry));
-      afterAll(() => models.Entry.delete());
+      afterAll(() => models.Entry.deleteMany());
 
       it('should return the correct entry', async () => {
         const result = await entryService.getByEntryIdAndTargetId(entryId, String(targetId));
@@ -113,7 +113,7 @@ describe('EntryService', () => {
       ];
 
       beforeAll(() => models.Entry.create(newEntries));
-      afterAll(() => models.Entry.delete());
+      afterAll(() => models.Entry.deleteMany());
 
       it('should return filtered entries', async () => {
         const result = await entryService.getByTargetId(String(targetId));
@@ -158,7 +158,7 @@ describe('EntryService', () => {
       ];
 
       beforeAll(() => models.Entry.create(newEntries));
-      afterAll(() => models.Entry.delete());
+      afterAll(() => models.Entry.deleteMany());
 
       it('should return difference of new and existing ids', async () => {
         const entriesIds = ['new-entry-id', newEntries[1].entryId, newEntries[2].entryId];
