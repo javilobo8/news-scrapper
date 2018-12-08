@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node bin/www",
-    "test": "jest --detectOpenHandles --forceExit",
+    "test": "jest --detectOpenHandles --forceExit --ci",
     "lint": "eslint src"
   },
   "dependencies": {
