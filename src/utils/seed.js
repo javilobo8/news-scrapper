@@ -5,6 +5,7 @@ const TARGETS = [
     name: 'Darkumbra - Switch Content',
     scrapperName: 'darkumbra',
     description: 'Switch content games',
+    tags: ['switch'],
     http: {
       client: 'axios',
       clientOptions: {
@@ -25,6 +26,7 @@ const TARGETS = [
     name: 'PreDB',
     scrapperName: 'predb',
     description: 'Switch releases list page',
+    tags: ['switch'],
     http: {
       client: 'puppeteer',
       clientOptions: {
@@ -44,6 +46,7 @@ const TARGETS = [
     name: 'NSWDB',
     scrapperName: 'nswdb',
     description: 'Switch releases list page',
+    tags: ['switch'],
     http: {
       client: 'axios',
       clientOptions: {
@@ -60,6 +63,7 @@ const TARGETS = [
     name: 'Reddit - SwitchHaxing/New',
     scrapperName: 'reddit-api',
     description: 'Reddit SwitchHaxing New posts',
+    tags: ['switch'],
     http: {
       client: 'axios',
       clientOptions: {

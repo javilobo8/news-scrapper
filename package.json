@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node bin/www",
-    "test": "jest"
+    "test": "jest --detectOpenHandles --forceExit",
+    "lint": "eslint src"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -19,7 +20,8 @@
     "mongoose": "^5.3.13",
     "node-schedule": "^1.3.0",
     "puppeteer": "^1.10.0",
-    "qs": "^6.5.2"
+    "qs": "^6.5.2",
+    "supertest": "^3.3.0"
   },
   "devDependencies": {
     "eslint": "^5.9.0",
@@ -33,8 +35,11 @@
     "mongodb-memory-server": "^2.7.4"
   },
   "jest": {
+    "setupFiles": ["<rootDir>/test/bootstrap.js"],
     "testEnvironment": "<rootDir>/test/mongo-environment.js",
+    "verbose": true,
     "collectCoverage": true,
+    "testRunner": "jest-circus/runner",
     "collectCoverageFrom": [
       "**/*.js",
       "!**/node_modules/**",
@@ -44,6 +49,8 @@
       "<rootDir>/bin/",
       "<rootDir>/test/"
     ],
-    "coverageReporters": ["html"]
+    "coverageReporters": [
+      "html"
+    ]
   }
 }

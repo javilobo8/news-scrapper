@@ -8,6 +8,37 @@ describe('EntryService', () => {
   beforeAll(() => prepareDB.connect());
   afterAll(() => prepareDB.disconnect());
 
+  describe('get', () => {
+    describe('when it runs', () => {
+      const targetId = new models.mongoose.Types.ObjectId();
+      const newEntries = [
+        {
+          entryId: 'aabbccdd-1',
+          title: 'test-title',
+          subtitle: 'test-subtitle',
+          url: 'http://test.url',
+          targetId,
+        },
+        {
+          entryId: 'aabbccdd-2',
+          title: 'test-title',
+          subtitle: 'test-subtitle',
+          url: 'http://test.url',
+          targetId,
+        },
+      ];
+
+      beforeAll(() => models.Entry.create(newEntries));
+      afterAll(() => models.Entry.deleteMany());
+
+      it('should return entries', async () => {
+        const result = await entryService.get();
+
+        expect(result).toHaveLength(2);
+      });
+    });
+  });
+
   describe('createMany', () => {
     describe('when it runs', () => {
       const newEntries = [

@@ -1,3 +1,4 @@
+require('./globals');
 const express = require('express');
 const models = require('./models');
 const config = require('./config');
@@ -9,7 +10,6 @@ const createEmitter = require('./events');
 
 const WebScrapper = require('./schedulers/webscrapper');
 
-require('./globals');
 require('./db');
 
 const app = express();
@@ -26,7 +26,9 @@ const container = {
   emitter,
 };
 
-container.scrapper.init();
+if (!__TEST__) {
+  container.scrapper.init();
+}
 
 createControllers(app, container);
 

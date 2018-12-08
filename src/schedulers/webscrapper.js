@@ -1,7 +1,6 @@
 const schedule = require('node-schedule');
 
 const scrappers = require('../scrappers');
-
 const logger = require('../utils/logger');
 
 class WebScrapper {
@@ -102,7 +101,7 @@ class WebScrapper {
       const entries = scrappers[target.scrapperName](html);
       const entriesIds = entries.map((entry) => entry.entryId);
 
-      const newEntriesIds = await this.entryService.filterNonExistentIds(entriesIds);
+      const newEntriesIds = await this.entryService.filterNonExistentIds(entriesIds, targetId);
       const entriesToInsert = entries
         .filter((entry) => newEntriesIds.includes(entry.entryId))
         .map((entry) => ({ ...entry, targetId: target._id }));

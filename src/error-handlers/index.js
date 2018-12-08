@@ -3,7 +3,8 @@ const Boom = require('boom');
 function sendError(res) {
   return (error) => {
     console.error(error);
-    res.send(Boom.internal().output.payload);
+    const boom = Boom.internal();
+    res.status(boom.output.statusCode).send(boom.output.payload);
   };
 }
 

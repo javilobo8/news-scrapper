@@ -1,7 +1,7 @@
+/* eslint-disable no-restricted-syntax, import/no-dynamic-require */
 const { Router } = require('express');
 const path = require('path');
-
-const TaskController = require('./task');
+const fs = require('fs');
 
 /**
  * Creates a router from routes and binds to a controller.
@@ -32,6 +32,16 @@ function createRouterFromController(app, controller, routes) {
   console.log(`Bound ${controller.constructor.name}`);
 }
 
+function getControllerNames() {
+  return fs.readdirSync(__dirname)
+    .reduce((previous, current) => {
+      if (/\.controller\.js$/ig.test(current)) {
+        previous.push(current);
+      }
+      return previous;
+    }, []);
+}
+
 /**
  * Creates all the controllers and routers and pass them to Express.
  *
@@ -39,11 +49,19 @@ function createRouterFromController(app, controller, routes) {
  * @param {Object} container
  */
 function createControllers(app, container) {
-  console.log('Creating routes');
-  const taskController = new TaskController(container);
+  console.log('Creating controllers');
+  const controllers = {};
 
-  createRouterFromController(app, taskController, TaskController.routes);
-  console.log('Routes initialized');
+  const controllerNames = getControllerNames();
+
+  for (const controllerName of controllerNames) {
+    const Controller = require(`./${controllerName}`);
+    controllers[controllerName] = new Controller(container);
+    createRouterFromController(app, controllers[controllerName], Controller.routes);
+  }
+
+  console.log('Controllers initialized');
+  return controllers;
 }
 
 module.exports = createControllers;

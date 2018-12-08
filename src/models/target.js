@@ -12,6 +12,7 @@ const TargetSchema = mongoose.Schema({
   name: { type: String, required: true },
   scrapperName: { type: String, required: true },
   description: String,
+  tags: [String],
   http: {
     client: { type: String, enum: _.values(httpClients) },
     clientOptions: {

@@ -14,12 +14,11 @@
     "wrap-iife": "off",
     "no-plusplus": "off",
     "no-await-in-loop": "off",
-    "global-require": "off"
+    "global-require": "off",
+    "dot-notation": "off",
+    "arrow-body-style": "off"
   },
   "globals": {
-    "writeFile": true,
-    "readFile": true,
-    "existsFile": true,
-    "LOG": true
+    "__TEST__": true
   }
 }

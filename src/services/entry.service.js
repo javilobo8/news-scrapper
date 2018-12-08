@@ -9,6 +9,13 @@ class EntryService {
   }
 
   /**
+   * Get all Entries
+   */
+  get(params = {}) {
+    return this.EntryModel.find(params).exec();
+  }
+
+  /**
    * Creates new Entries
    *
    * @param {Entry[]} newEntries

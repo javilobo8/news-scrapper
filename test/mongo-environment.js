@@ -13,16 +13,14 @@ class MongoEnvironment extends NodeEnvironment {
   }
 
   async setup() {
-    console.log('Setup MongoDB Test Environment');
     await super.setup();
     await this.mongod.start();
     this.global.__MONGOMS_URI__ = await this.mongod.getConnectionString();
   }
 
   async teardown() {
-    console.log('Teardown MongoDB Test Environment');
-    await super.teardown();
     await this.mongod.stop();
+    await super.teardown();
   }
 
   runScript(script) {
