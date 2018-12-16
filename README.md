@@ -9,4 +9,4 @@ Application for save/send posts from scrapping webs. Useful for news, forums, li
 * Add express for consume from some client. - DONE
 * Error handling. - DONE
 * Implement `maxRetries` client option.
-* Tests and e2e.
+* Tests.

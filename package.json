@@ -1,27 +1,24 @@
 {
-  "name": "poc-news-bot",
+  "name": "news-bot",
   "description": "POC of a bot for scraping webs",
   "version": "1.0.0",
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node bin/www",
-    "test": "jest --detectOpenHandles --forceExit --ci",
+    "start": "node src/index",
+    "test": "jest --detectOpenHandles --ci",
     "lint": "eslint src"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "bluebird": "^3.5.3",
-    "boom": "^7.2.2",
     "chalk": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
-    "express": "^4.16.4",
     "lodash": "^4.17.11",
     "mongoose": "^5.3.13",
     "node-schedule": "^1.3.0",
     "puppeteer": "^1.10.0",
-    "qs": "^6.5.2",
-    "supertest": "^3.3.0"
+    "qs": "^6.5.2"
   },
   "devDependencies": {
     "eslint": "^5.9.0",

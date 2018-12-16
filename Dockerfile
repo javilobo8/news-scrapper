@@ -7,5 +7,4 @@ COPY package.json yarn.lock ./
 RUN yarn install --production
 COPY . .
 
-EXPOSE 8080
-CMD ["node", "./bin/www"]
+CMD ["yarn", "start"]
