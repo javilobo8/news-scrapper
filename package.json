@@ -1,5 +1,5 @@
 {
-  "name": "news-bot",
+  "name": "news-scrapper",
   "description": "POC of a bot for scraping webs",
   "version": "1.0.0",
   "main": "src/index.js",

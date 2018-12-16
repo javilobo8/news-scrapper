@@ -1,4 +1,4 @@
-# poc-news-bot
+# news-scrapper
 
 [![build](https://travis-ci.org/javilobo8/poc-news-bot.svg?branch=master)](https://travis-ci.org/javilobo8/poc-news-bot)
 
