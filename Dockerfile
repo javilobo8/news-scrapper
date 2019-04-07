@@ -1,10 +1,11 @@
-FROM node:10-slim
+FROM node:8-slim
 
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 
-COPY package.json yarn.lock ./
-RUN yarn install --production
-COPY . .
+COPY package*.json ./
+RUN npm install --production
 
-CMD ["yarn", "start"]
+COPY . ./
+
+CMD ["npm", "start"]

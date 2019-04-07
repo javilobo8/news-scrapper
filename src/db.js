@@ -1,4 +1,10 @@
-const models = require('./models');
-const config = require('./config');
+(() => {
+  if (process.env.NODE_ENV === 'test') {
+    return;
+  }
 
-models.connect(config.mongo.uri);
+  const models = require('./models');
+  const config = require('../config');
+
+  models.connect(config.mongo.uri);
+})();

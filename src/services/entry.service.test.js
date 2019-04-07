@@ -1,12 +1,18 @@
+const { expect } = require('chai');
+
 const EntryService = require('./entry.service');
 const models = require('../models');
-const prepareDB = require('../../test/prepare-db')(models.mongoose);
+const testDB = require('../../test/test-db');
+
+const {
+  Entry: EntryModel,
+} = models;
 
 describe('EntryService', () => {
   const entryService = new EntryService({ models });
 
-  beforeAll(() => prepareDB.connect());
-  afterAll(() => prepareDB.disconnect());
+  before(() => testDB.connect());
+  after(() => testDB.disconnect());
 
   describe('get', () => {
     describe('when it runs', () => {
@@ -28,13 +34,13 @@ describe('EntryService', () => {
         },
       ];
 
-      beforeAll(() => models.Entry.create(newEntries));
-      afterAll(() => models.Entry.deleteMany());
+      before(() => EntryModel.create(newEntries));
+      after(() => EntryModel.deleteMany());
 
       it('should return entries', async () => {
         const result = await entryService.get();
 
-        expect(result).toHaveLength(2);
+        expect(result).to.have.lengthOf(2);
       });
     });
   });
@@ -58,13 +64,13 @@ describe('EntryService', () => {
         },
       ];
 
-      afterAll(() => models.Entry.deleteMany());
+      after(() => EntryModel.deleteMany());
 
       it('should add new entries', async () => {
         await entryService.createMany(newEntries);
-        const result = await models.Entry.find();
+        const result = await EntryModel.find();
 
-        expect(result).toHaveLength(2);
+        expect(result).to.have.lengthOf(2);
       });
     });
   });
@@ -81,17 +87,17 @@ describe('EntryService', () => {
         targetId: new models.mongoose.Types.ObjectId(),
       };
 
-      beforeAll(() => models.Entry.create(baseEntry));
-      afterAll(() => models.Entry.deleteMany());
+      before(() => new EntryModel(baseEntry).save());
+      after(() => EntryModel.deleteMany());
 
       it('should return the correct entry', async () => {
         const result = await entryService.getById(entryDocId);
 
-        expect(result).toHaveProperty('entryId', baseEntry.entryId);
-        expect(result).toHaveProperty('title', baseEntry.title);
-        expect(result).toHaveProperty('subtitle', baseEntry.subtitle);
-        expect(result).toHaveProperty('url', baseEntry.url);
-        expect(result).toHaveProperty('targetId', baseEntry.targetId);
+        expect(result.entryId).to.be.equal(baseEntry.entryId);
+        expect(result.title).to.be.equal(baseEntry.title);
+        expect(result.subtitle).to.be.equal(baseEntry.subtitle);
+        expect(result.url).to.be.equal(baseEntry.url);
+        expect(result.targetId).to.be.eql(baseEntry.targetId);
       });
     });
   });
@@ -108,17 +114,17 @@ describe('EntryService', () => {
         targetId,
       };
 
-      beforeAll(() => models.Entry.create(baseEntry));
-      afterAll(() => models.Entry.deleteMany());
+      before(() => new EntryModel(baseEntry).save());
+      after(() => EntryModel.deleteMany());
 
       it('should return the correct entry', async () => {
         const result = await entryService.getByEntryIdAndTargetId(entryId, String(targetId));
 
-        expect(result).toHaveProperty('entryId', baseEntry.entryId);
-        expect(result).toHaveProperty('title', baseEntry.title);
-        expect(result).toHaveProperty('subtitle', baseEntry.subtitle);
-        expect(result).toHaveProperty('url', baseEntry.url);
-        expect(result).toHaveProperty('targetId', baseEntry.targetId);
+        expect(result.entryId).to.be.equal(baseEntry.entryId);
+        expect(result.title).to.be.equal(baseEntry.title);
+        expect(result.subtitle).to.be.equal(baseEntry.subtitle);
+        expect(result.url).to.be.equal(baseEntry.url);
+        expect(result.targetId).to.be.eql(baseEntry.targetId);
       });
     });
   });
@@ -143,13 +149,13 @@ describe('EntryService', () => {
         },
       ];
 
-      beforeAll(() => models.Entry.create(newEntries));
-      afterAll(() => models.Entry.deleteMany());
+      before(() => EntryModel.create(newEntries));
+      after(() => EntryModel.deleteMany());
 
       it('should return filtered entries', async () => {
         const result = await entryService.getByTargetId(String(targetId));
 
-        expect(result).toHaveLength(2);
+        expect(result).to.have.lengthOf(2);
       });
     });
   });
@@ -188,15 +194,15 @@ describe('EntryService', () => {
         },
       ];
 
-      beforeAll(() => models.Entry.create(newEntries));
-      afterAll(() => models.Entry.deleteMany());
+      before(() => EntryModel.create(newEntries));
+      after(() => EntryModel.deleteMany());
 
       it('should return difference of new and existing ids', async () => {
         const entriesIds = ['new-entry-id', newEntries[1].entryId, newEntries[2].entryId];
         const result = await entryService.filterNonExistentIds(entriesIds, String(targetId));
 
-        expect(result).toHaveLength(1);
-        expect(result[0]).toBe('new-entry-id');
+        expect(result).to.have.lengthOf(1);
+        expect(result[0]).to.be.equal('new-entry-id');
       });
     });
   });

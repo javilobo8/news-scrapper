@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/index",
-    "test": "jest --detectOpenHandles --ci",
+    "test": "NODE_ENV=test mocha --recursive src",
     "lint": "eslint src"
   },
   "dependencies": {
@@ -21,33 +21,12 @@
     "qs": "^6.5.2"
   },
   "devDependencies": {
-    "eslint": "^5.9.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^22.1.2",
-    "jest": "^23.6.0",
-    "jest-circus": "^23.6.0",
-    "jest-environment-node": "^23.4.0",
-    "mongodb": "^3.1.10",
-    "mongodb-memory-server": "^2.7.4"
-  },
-  "jest": {
-    "setupFiles": ["<rootDir>/test/bootstrap.js"],
-    "testEnvironment": "<rootDir>/test/mongo-environment.js",
-    "verbose": true,
-    "collectCoverage": true,
-    "testRunner": "jest-circus/runner",
-    "collectCoverageFrom": [
-      "**/*.js",
-      "!**/node_modules/**",
-      "!**/vendor/**"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/bin/",
-      "<rootDir>/test/"
-    ],
-    "coverageReporters": [
-      "html"
-    ]
+    "eslint-plugin-import": "^2.16.0",
+    "mocha": "^6.1.0",
+    "mongodb": "^3.2.3",
+    "mongodb-memory-server": "^4.2.1"
   }
 }
