@@ -1,5 +1,4 @@
-const models = require('../models');
-
+/* eslint-disable */
 const TARGETS = [
   {
     name: 'Darkumbra - Switch Content',
@@ -78,35 +77,35 @@ const TARGETS = [
   },
 ];
 
-module.exports = async function seed() {
-  await models.Target.deleteMany();
-  await models.Entry.deleteMany();
-  await models.Task.deleteMany();
+db.targets.remove({});
+db.tasks.remove({});
+db.entries.remove({});
 
-  await models.Target.create(TARGETS);
+db.targets.insert(TARGETS);
 
-  const targetIds = (await models.Target.find({}, { _id: 1 })).map((t) => t._id);
+const targets = db.targets.find({}).toArray();
 
-  const tasks = [
-    {
-      name: 'TASK #1',
-      description: 'Test task number 1',
-      active: true,
-      startOnCreate: true,
-      cron: '* * * * *',
-      targets: [...targetIds],
-      emails: ['test@test.com'],
-    },
-    {
-      name: 'TASK #2',
-      description: 'Test task number 2',
-      active: false,
-      startOnCreate: false,
-      cron: '* * * * *',
-      targets: [targetIds[3]],
-      emails: ['test@test.com'],
-    },
-  ];
+const task1Ids = targets.map((t) => t._id);
 
-  await models.Task.create(tasks);
-};
+const tasks = [
+  {
+    name: 'TASK #1',
+    description: 'Test task number 1',
+    active: true,
+    startOnCreate: true,
+    cron: '* * * * *',
+    targets: [...task1Ids],
+    emails: ['test@test.com'],
+  },
+  {
+    name: 'TASK #2',
+    description: 'Test task number 2',
+    active: false,
+    startOnCreate: false,
+    cron: '* * * * *',
+    targets: [],
+    emails: ['test@test.com'],
+  },
+];
+
+db.tasks.insert(tasks);

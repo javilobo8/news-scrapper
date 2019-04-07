@@ -15,7 +15,7 @@ const container = {
   services,
   scrapper,
 };
-  
+
 if (!__TEST__) {
   container.scrapper.init();
 }
