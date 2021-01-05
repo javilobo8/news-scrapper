@@ -10,7 +10,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bluebird": "^3.5.3",
     "chalk": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
